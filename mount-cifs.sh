@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ash
 REMOTE_HOST=devselenium01.toronto.ethoca.com
 REMOTE_PATH=jenkinsshare
 LOCAL_PATH=/mnt/cifs
@@ -7,10 +7,7 @@ LOCAL_PATH=/mnt/cifs
 CIFS_USERNAME=jenkinsshare
 # -- -- create a credentials file from secret
 SECRET=$(cat /run/secret/$CIFS_USERNAME)
-cat << EOF > /root/.credentials
-USER=$CIFS_USERNAME
-PASS=$SECRET
-EOF
+echo -e "USER=$CIFS_USERNAME\nPASS=$SECRET" > /root/.credentials
 # -- workaround for current Ubuntu host from template
 # -- -- load cifs and fscache modules
 modprobe fscache

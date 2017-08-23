@@ -6,7 +6,9 @@ LOCAL_PATH=/mnt/cifs
 # -- -- secret name is the CIFS username
 CIFS_USERNAME=jenkinsshare
 # -- -- create a credentials file from secret
-SECRET=$(cat /run/secret/$CIFS_USERNAME)
+# -- -- NOTE: the path to the secret is specific to Rancher Server
+# -- -- TODO: more generic solution to support other orchestration solutions
+SECRET=$(cat /run/secrets/$CIFS_USERNAME)
 # -- workaround for current Ubuntu host from template
 # -- -- load cifs and fscache modules
 modprobe fscache

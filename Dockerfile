@@ -3,13 +3,12 @@ FROM alpine:latest
 # -- add cifs tools
 RUN apk add --update --no-cache cifs-utils
 
-# -- TODO: set permissions on the mounted volume
-
 # -- add entrypoint script
-RUN mkdir /docker-entrypoint-init.d
-ADD ./mount-cifs.sh /docker-entrypoint-init.d/
+COPY ./docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
 # -- set entrypoint script
-ENTRYPOINT ["/docker-entrypoint-init.d/mount-cifs.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
+# -- expose the mounted volume
 VOLUME /mnt/cifs

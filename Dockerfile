@@ -7,8 +7,8 @@ RUN apk add --update --no-cache cifs-utils
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
+# -- expose /mnt/cifs directory as volume before mount bellow
+VOLUME /mnt/cifs
+
 # -- set entrypoint script
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
-# -- expose the mounted volume
-VOLUME /mnt/cifs
